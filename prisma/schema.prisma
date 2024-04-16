@@ -18,18 +18,19 @@ model Order {
     title      String?
     briefing   String?
     createdAt  DateTime  @default(now())
-    updattedAt DateTime  @updatedAt
+    updatedAt  DateTime  @updatedAt
     expiration DateTime?
-    war        War       @relation(fields: [warId], references: [id])
-    warId      String    @db.Uuid
+    war        War?      @relation(fields: [warId], references: [id])
+    warId      String?   @db.Uuid
     status     Status?
 
+    @@unique([title, status])
     @@index([warId])
 }
 
 enum Status {
-    Active
-    Expired
+    ACTIVE
+    EXPIRED
 }
 
 model War {
