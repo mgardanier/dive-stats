@@ -1,2 +1,2 @@
 # dive-stats
-Stats about your helldiver
+Stats about the current state of affiars in Helldivers II
