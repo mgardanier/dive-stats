@@ -1,2 +1,2 @@
 # dive-stats
-Stats about the current state of affiars in Helldivers II
+Stats about the current state of affairs in Helldivers II
