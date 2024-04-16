@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 const getOrders = async (req, res) => {
@@ -7,9 +7,13 @@ const getOrders = async (req, res) => {
             status: 'ACTIVE'
         }
     })
+    console.log(order)
+    res.status(200).json({
+        'orders': [order]
+    })
 }
 
 
-module.export = {
+module.exports = {
     getOrders
 }
