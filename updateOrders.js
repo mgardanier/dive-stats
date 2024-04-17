@@ -18,18 +18,22 @@ axios.request(config).then(async function (res) {
     let data = []
     const statusCode = res.statusCode
 
-    console.log(res.status)
     if (res.status !== 200) {
         return
     }
-    debugger
-    console.log(res.data[0].expiresIn)
     const order = res.data[0]
     expiration = new Date(new Date().getTime() + (1000 * order.expiresIn))
-    console.log(new Date())
-    console.log(expiration)
+    const existingOrder = await prisma.order.findUnique({
+        where: {
+            orderId: order.id32
+        }
+    })
+    if (existingOrder) {
+        setPreviousOrderInactive(existingOrder.orderId)
+    }
     await prisma.order.create({
         data: {
+            orderId: order.id32,
             title: order.setting.overrideTitle,
             briefing: order.setting.overrideBrief,
             expiration: expiration,
@@ -39,3 +43,15 @@ axios.request(config).then(async function (res) {
         console.log(`Unable to update order: ${error}`)
     })
 })
+
+async function setPreviousOrderInactive(orderId) {
+    result = await prisma.order.update({
+        where: {
+            orderId: orderId
+        },
+        data: {
+            status: 'EXPIRED'
+        }
+    })
+    return result
+}
