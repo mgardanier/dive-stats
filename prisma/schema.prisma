@@ -15,7 +15,7 @@ datasource db {
 
 model Order {
     id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    orderId    BigInt    @unique
+    orderId    String    @unique
     title      String?
     briefing   String?
     createdAt  DateTime  @default(now())
