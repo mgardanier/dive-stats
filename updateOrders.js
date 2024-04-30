@@ -4,11 +4,13 @@ const prisma = new PrismaClient()
 
 const headers = {
     'X-Application-Contact': 'mgardanier@gmail.com',
+    'X-Super-Contact': 'mgardanier@gmail.com',
+    'X-Super-Client': 'Dive Stats'
     'User-Agent': 'divers-stats/0.0.1',
     'Content-Type': 'application/json'
 }
 const config = {
-    baseURL: 'https://helldivers-2-dotnet.fly.dev',
+    baseURL: 'https://api.helldivers2.dev',
     url: '/raw/api/v2/Assignment/War/801',
     method: 'get',
     headers: headers
